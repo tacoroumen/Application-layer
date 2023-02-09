@@ -7,15 +7,15 @@ import (
 	"time"
 )
 
-func check_license(text string) func() bool {
+func check_license(text string) func() bool{
 	result := false
-	plates := []string{"L653FD\r\n", "TL78JJ\r\n", "P565TT\r\n", "YT31VD\r\n", "XL655V\r\n"}
-
+	allowed_plates := []string{"L653FD\r\n", "TL78JJ\r\n", "P565TT\r\n", "YT31VD\r\n", "XL655V\r\n"}
+	
 	return func() bool {
-		for i := 0; i < len(plates); i++ {
-			if plates[i] == text {
+		for i := 0; i < len(allowed_plates); i++ {
+			if allowed_plates[i] == text {
 				result = true
-
+				
 			}
 		}
 		return result
@@ -37,25 +37,27 @@ func get_message() func() string {
 		default:
 			fmt.Println("")
 		}
-
+		
 		return hello_message
 	}
 }
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Please enter the licenseplate: ")
-	text, _ := reader.ReadString('\n')
-	plate_allowed := check_license(text)
+    fmt.Print("Please enter the licenseplate: ")
+    plate, _ := reader.ReadString('\n')
+	plate_allowed := check_license(plate)
 	dt := time.Now()
-	if plate_allowed() {
+	if (plate_allowed()) {
 		switch {
 		case dt.Hour() >= 23 && dt.Hour() < 7:
 			fmt.Println("Sorry, de parkeerplaats is ’s nachts gesloten")
-
+			
 		default:
 			message := get_message()
 			fmt.Println(message(), "Welkom bij Fonteyn Vakantieparken")
 		}
+	} else {
+		fmt.Println("U heeft helaas geen toegang tot het parkeerterrein")
 	}
 }
