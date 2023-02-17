@@ -1,0 +1,1 @@
+results := make(chan PortResult)
