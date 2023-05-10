@@ -36,18 +36,18 @@ type Payload struct {
 
 func main() {
 	//enable logger to errors.log
-	loger, eror := os.OpenFile("errors.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	logger, eror := os.OpenFile("errors.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if eror != nil {
 		log.Fatal(eror.Error())
 	}
-	defer loger.Close()
+	defer logger.Close()
 	access, eror := os.OpenFile("access.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if eror != nil {
 		log.Fatal(eror.Error())
 	}
-	defer loger.Close()
+	defer logger.Close()
 
-	log.SetOutput(loger)
+	log.SetOutput(logger)
 
 	//check if lincesplate provided
 	plate := flag.String("plate", "", "Must provide a plate to check acces")
@@ -58,7 +58,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	dbUser := "Admin"g
+	dbUser := "Admin"
 	dbPass := "Afslag01!"
 	dbName := "pop_db"
 	dbAddress := "127.0.0.1"
