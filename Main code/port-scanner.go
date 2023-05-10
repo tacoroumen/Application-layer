@@ -3,14 +3,14 @@ package main
 import (
     "fmt"
     "net"
-    //"sort"
     "time"
+    "os"
 )
 
-func scanPort(targetIP string, port int, results chan int) {
+func scanPort(targetIP string, port int, protocol string, results chan int) {
     address := fmt.Sprintf("%s:%d", targetIP, port)
 
-    conn, err := net.DialTimeout("tcp4", address, time.Second)
+    conn, err := net.DialTimeout(protocol, address, time.Second)
 
     if err == nil {
         conn.Close()
@@ -23,7 +23,7 @@ func scanPort(targetIP string, port int, results chan int) {
 
 func main() {
     start := time.Now()
-    targetIP := "31.201.56.59"
+    targetIP := os.Args[1]//"31.201.56.59"//"145.220.73.13"//"145.220.75.100"
     startPort := 1
     endPort := 65535
     numWorkers := 5
@@ -41,7 +41,8 @@ func main() {
     }
 
     for port := startPort; port <= endPort; port++ {
-        go scanPort(targetIP, port, results)
+        go scanPort(targetIP, port, "tcp", results)
+        //go scanPort(targetIP, port, "udp4", results)
     }
 
     for i := 0; i < endPort-startPort+1; i++ {

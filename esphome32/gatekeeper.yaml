@@ -1,0 +1,61 @@
+esphome:
+  name: gatekeeper
+
+logger: 
+  level: VERY_VERBOSE
+
+esp32:
+  board: esp32doit-devkit-v1
+  framework:
+    type: arduino
+
+#api:
+#  password: "AfslagA1!"
+
+wifi:
+  ssid: "ESP32"
+  password: "04juLi2003!"
+
+ota:
+  password: "AfslagA1!"
+
+servo:
+  - id: my_servo
+    output: pwm_out
+
+output:
+  - platform: ledc
+    pin: 25
+    id: pwm_out
+    frequency: 50 Hz
+
+
+sensor:
+  - platform: uptime
+    name: "uptime"
+
+web_server:
+  port: 80
+  auth:
+    username: Proftaak
+    password: AfslagA1!
+
+switch:
+  - platform: gpio
+    pin: 26
+    id: gate
+    name: "gate"
+    on_turn_on:
+      - switch.turn_on: gate
+      - servo.write: 
+          id: my_servo
+          level: -100.0%
+      - delay: 5s
+      - switch.turn_off: gate
+    on_turn_off:
+      - switch.turn_off: gate
+      - servo.write: 
+          id: my_servo
+          level: 100.0%
+  - platform: restart
+    name: reboot

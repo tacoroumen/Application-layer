@@ -1,0 +1,17 @@
+[
+    {
+        "Morning_start_time": 7,
+	    "Noon_start_time": 12,
+	    "Evening_start_time": 18,
+	    "No_parking_acces_start_time": 23,
+	    "API_ip_or_domain": "http://192.168.137.77",
+		"API_port": "80",
+	    "Morning_message": "Good morning",
+        "Noon_message": "Good afternoon",
+	    "Evening_message": "Good evening",
+        "No_parking_acces_message": "Sorry, our parking facilities are currently closed.",
+		"Technical_dificulties": "Sorry, we are currently experiencing technical dificulties",
+	    "Welcome_message": "Welcome at Holiday parks.",
+		"Not_allowed": "Licensplate not permited!"
+	}
+]
