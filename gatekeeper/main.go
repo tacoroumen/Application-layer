@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"database/sql"
+	//"database/sql"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 	
-	_ "github.com/go-sql-driver/mysql"
+	//_ "github.com/go-sql-driver/mysql"
 )
 
 type Config struct {
@@ -35,6 +35,7 @@ type Payload struct {
 }
 
 func main() {
+	url := "http://127.0.0.1:8080/nummerplaat"
 	//enable logger to errors.log
 	logger, eror := os.OpenFile("errors.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if eror != nil {
@@ -58,45 +59,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	dbUser := "Admin"
-	dbPass := "Afslag01!"
-	dbName := "pop_db"
-	dbAddress := "127.0.0.1"
-	userName := ""
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", dbUser, dbPass, dbAddress, dbName)
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		log.Println("Connection to database not establisched:", err.Error())
-		return
-	}
-	defer db.Close()
-
-	// Ping database to ensure connection is valid
-	err = db.Ping()
-	if err != nil {
-		log.Println("Database not responding to ping request:", err.Error())
-		return
-	}
-	log.Println("Database connection establisched!")
-
-	rows, err := db.Query("SELECT name FROM customer WHERE licenseplate = ?", *plate)
-	if err != nil {
-		log.Println(err.Error())
-		panic(err.Error())
-	}
-	defer rows.Close()
-
-	// Iterate over the query results and print the data
-	for rows.Next() {
-		var name string
-
-		err := rows.Scan(&name)
-		if err != nil {
-			panic(err.Error())
-		}
-		userName = name
-	}
-
 	file, err := os.Open("config.json")
 	if err != nil {
 		log.Println(err)
@@ -114,6 +76,32 @@ func main() {
 	}
 	dt := time.Now()
 
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		panic(err)
+	}
+	q := req.URL.Query()
+	q.Add("licenseplate", *plate)
+	req.URL.RawQuery = q.Encode()
+
+	// Make the request and get the response
+	client := http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	// Parse the JSON response and get the name
+	var response struct {
+		Name string `json:"naam"`
+	}
+	err = json.NewDecoder(resp.Body).Decode(&response)
+	if err != nil {
+		panic(err)
+	}
+	userName := response.Name
+
 	for _, Config := range conf {
 		if userName == "" {
 			fmt.Printf("%s\n", Config.Not_allowed)
@@ -121,7 +109,7 @@ func main() {
 		}
 		log.SetOutput(access)
 		log.Printf("%s gained access to parking.\n", *plate)
-		log.SetOutput(loger)
+		log.SetOutput(logger)
 		payload := Payload{Data: ""}
 		jsonPayload, err := json.Marshal(payload)
 		if err != nil {
