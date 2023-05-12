@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	//"database/sql"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -10,8 +9,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-	
-	//_ "github.com/go-sql-driver/mysql"
 )
 
 type Config struct {
@@ -20,7 +17,7 @@ type Config struct {
 	Evening_start_time          int
 	No_parking_acces_start_time int
 	API_ip_or_domain            string
-	API_port					string
+	API_port                    string
 	Morning_message             string
 	Noon_message                string
 	Evening_message             string
@@ -28,6 +25,7 @@ type Config struct {
 	Technical_dificulties       string
 	Welcome_message             string
 	Not_allowed                 string
+	API_Url                     string
 }
 
 type Payload struct {
@@ -35,7 +33,7 @@ type Payload struct {
 }
 
 func main() {
-	url := "http://127.0.0.1:8080/nummerplaat"
+	userName := ""
 	//enable logger to errors.log
 	logger, eror := os.OpenFile("errors.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if eror != nil {
@@ -75,34 +73,36 @@ func main() {
 		return
 	}
 	dt := time.Now()
+	for _, Config := range conf {
+		req, err := http.NewRequest("GET", Config.API_Url, nil)
+		if err != nil {
+			panic(err)
+		}
+		q := req.URL.Query()
+		q.Add("licenseplate", *plate)
+		req.URL.RawQuery = q.Encode()
 
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		panic(err)
-	}
-	q := req.URL.Query()
-	q.Add("licenseplate", *plate)
-	req.URL.RawQuery = q.Encode()
+		// Make the request and get the response
+		client := http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
 
-	// Make the request and get the response
-	client := http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
+		// Parse the JSON response and get the name
+		var response struct {
+			Name string `json:"naam"`
+		}
+		err = json.NewDecoder(resp.Body).Decode(&response)
+		if err != nil {
+			panic(err)
+		}
+		userName = response.Name
 	}
-	defer resp.Body.Close()
-
-	// Parse the JSON response and get the name
-	var response struct {
-		Name string `json:"naam"`
-	}
-	err = json.NewDecoder(resp.Body).Decode(&response)
-	if err != nil {
-		panic(err)
-	}
-	userName := response.Name
 
 	for _, Config := range conf {
+
 		if userName == "" {
 			fmt.Printf("%s\n", Config.Not_allowed)
 			os.Exit(403)
@@ -134,7 +134,7 @@ func main() {
 		defer resp.Body.Close()
 
 		log.Println("Response status:", resp.Status)
-        
+
 		switch {
 		case dt.Hour() >= Config.No_parking_acces_start_time:
 			fmt.Printf("%s", Config.No_parking_acces_message)
