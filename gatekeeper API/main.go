@@ -1,12 +1,12 @@
 package main
 
 import (
-    "database/sql"
-    "encoding/json"
-    "log"
-    "net/http"
+	"database/sql"
+	"encoding/json"
+	"log"
+	"net/http"
 
-    _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Data struct {

@@ -4,7 +4,7 @@
 	    "Noon_start_time": 12,
 	    "Evening_start_time": 18,
 	    "No_parking_acces_start_time": 23,
-	    "API_ip_or_domain": "http://192.168.137.77",
+	    "API_ip_or_domain": "http://192.168.137.78",
 		"API_port": "80",
 	    "Morning_message": "Good morning",
         "Noon_message": "Good afternoon",
