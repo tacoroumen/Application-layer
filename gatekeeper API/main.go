@@ -32,7 +32,7 @@ func main() {
 			err = row.Scan(&data.Naam)
 			if err != nil {
 				if err == sql.ErrNoRows {
-					http.Error(w, "User not found", http.StatusNotFound)
+					http.Error(w, "License not found", http.StatusNotFound)
 					return
 				}
 				http.Error(w, "Database error", http.StatusInternalServerError)
