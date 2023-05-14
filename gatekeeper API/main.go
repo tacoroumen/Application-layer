@@ -35,8 +35,7 @@ func main() {
 				http.Error(w, "Database error", http.StatusInternalServerError)
 				return
 			}
-			test := "Test"
-			info := db.QueryRow("SELECT checkout FROM reservering WHERE name=?", test)
+			info := db.QueryRow("SELECT checkout FROM reservering WHERE name=?", data.Naam)
 			err = info.Scan(&data.Checkout)
 			if err != nil {
 				if err == sql.ErrNoRows {
