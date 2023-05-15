@@ -167,3 +167,5 @@
 2023/05/12 16:34:52 Response status: 200 OK
 2023/05/12 16:36:15 Response status: 200 OK
 2023/05/12 18:51:56 Failed to send http request: Post "http://192.168.137.78:80/switch/gate/turn_on": dial tcp 192.168.137.78:80: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+2023/05/12 19:48:18 No licenseplate provided, program terminated.
+2023/05/12 19:49:20 Failed to send http request: Post "http://192.168.137.78:80/switch/gate/turn_on": dial tcp 192.168.137.78:80: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.

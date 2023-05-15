@@ -13,6 +13,6 @@
 		"Technical_dificulties": "Sorry, we are currently experiencing technical dificulties",
 	    "Welcome_message": "Welcome at Holiday parks.",
 		"Not_allowed": "Licensplate not permited!",
-		"API_Url": "http://127.0.0.1:8080/nummerplaat"
+		"API_Url": "http://20.76.36.251:8080/nummerplaat"
 	}
 ]
