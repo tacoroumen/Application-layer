@@ -23,17 +23,17 @@ De code importeert de vereiste bibliotheken: cv2, pytesseract en subprocess.
 Er wordt een videostream van de webcam gestart met behulp van de cv2.VideoCapture(0)-functie.  
 Er wordt een oneindige lus gestart om continu frames van de videostream te lezen.  
 Voor elk frame wordt het volgende gedaan:  
-    Het huidige frame wordt gelezen met behulp van cap.read().  
-    Het frame wordt omgezet naar grijswaarden met behulp van cv2.cvtColor().  
-    Er wordt een Gaussische vervaging toegepast op het grijswaardenbeeld met cv2.GaussianBlur().  
-    Randen worden gedetecteerd met behulp van de Canny-randdetectiemethode met cv2.Canny().  
-    Contouren worden gevonden in de randafbeelding met behulp van cv2.findContours().  
-    De contouren worden gefilterd op basis van grootte om mogelijke kentekenplaten te vinden.  
-    Bounding boxen worden getekend rond de gevonden kentekenplaten met behulp van cv2.rectangle().  
-    PyTesseract wordt gebruikt voor optische tekenherkenning (OCR) op de individuele kentekenplaatgebieden om de tekens op het kenteken te lezen.  
-    Als een kenteken precies 6 tekens bevat, wordt een terminalopdracht uitgevoerd met het kenteken als argument.  
-    Het bewerkte frame wordt weergegeven in een venster met cv2.imshow().  
-    Als de 'q'-toets wordt ingedrukt, wordt de lus beëindigd.  
+    &nbsp;&nbsp;&nbsp;&nbsp;Het huidige frame wordt gelezen met behulp van cap.read().  
+    &nbsp;&nbsp;&nbsp;&nbsp;Het frame wordt omgezet naar grijswaarden met behulp van cv2.cvtColor().  
+    &nbsp;&nbsp;&nbsp;&nbsp;Er wordt een Gaussische vervaging toegepast op het grijswaardenbeeld met cv2.GaussianBlur().  
+    &nbsp;&nbsp;&nbsp;&nbsp;Randen worden gedetecteerd met behulp van de Canny-randdetectiemethode met cv2.Canny().  
+    &nbsp;&nbsp;&nbsp;&nbsp;Contouren worden gevonden in de randafbeelding met behulp van cv2.findContours().  
+    &nbsp;&nbsp;&nbsp;&nbsp;De contouren worden gefilterd op basis van grootte om mogelijke kentekenplaten te vinden.  
+    &nbsp;&nbsp;&nbsp;&nbsp;Bounding boxen worden getekend rond de gevonden kentekenplaten met behulp van cv2.rectangle().  
+    &nbsp;&nbsp;&nbsp;&nbsp;PyTesseract wordt gebruikt voor optische tekenherkenning (OCR) op de individuele kentekenplaatgebieden om de tekens op het kenteken te lezen.  
+    &nbsp;&nbsp;&nbsp;&nbsp;Als een kenteken precies 6 tekens bevat, wordt een terminalopdracht uitgevoerd met het kenteken als argument.  
+    &nbsp;&nbsp;&nbsp;&nbsp;Het bewerkte frame wordt weergegeven in een venster met cv2.imshow().  
+    &nbsp;&nbsp;&nbsp;&nbsp;Als de 'q'-toets wordt ingedrukt, wordt de lus beëindigd.  
 Nadat de lus is beëindigd, worden de video-opnamebron vrijgegeven en de vensters gesloten met cap.release() en cv2.destroyAllWindows().  
 In het kort, deze code maakt gebruik van computer vision-technieken om kentekenplaten te detecteren en te lezen van een videostream van de webcam, en voert vervolgens een terminalopdracht uit met het gedetecteerde kenteken als argument.  
   
