@@ -44,7 +44,9 @@ In het kort, deze code maakt gebruik van computer vision-technieken om kentekenp
 `"Noon_start_time:"` De starttijd van de middagperiode (12 uur).  
 `"Evening_start_time:"` De starttijd van de avondperiode (18 uur).  
 `"No_parking_acces_start_time:"` De starttijd waarop geen toegang tot de parkeerfaciliteiten is toegestaan (23 uur).  
-`"API_ip_or_domain:"` Het IP-adres of domein van de API waarmee wordt gecommuniceerd (http://192.168.137.18:80).   
+`"ESP_API_ip_or_domain:"` Het IP-adres of domein van de API waarmee wordt gecommuniceerd (http://192.168.137.18:80/switch/gate/turn_on). 
+`"ESP_API_user":` De gebruikersnaam die wordt gebruikt om te authenticeren bij de ESP API ("Proftaak").  
+`"ESP_API_passwrd":` het wachtwoord die wordt gebruikt om te authenticeren bij de ESP API("AfslagA1!").  
 `"Morning_message:"` Het bericht dat wordt weergegeven tijdens de ochtendperiode ("Good morning").  
 `"Noon_message:"` Het bericht dat wordt weergegeven tijdens de middagperiode ("Good afternoon").  
 `"Evening_message:"` Het bericht dat wordt weergegeven tijdens de avondperiode ("Good evening").  
