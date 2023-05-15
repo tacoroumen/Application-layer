@@ -52,6 +52,7 @@ In het kort, deze code maakt gebruik van computer vision-technieken om kentekenp
 "Welcome_message": Het welkomstbericht dat wordt weergegeven ("Welcome at Holiday parks.").  
 "Not_allowed": Het bericht dat wordt weergegeven wanneer een kentekenplaat niet is toegestaan ("License plate not permitted!").  
 "API_Url": De URL van de API waarmee wordt gecommuniceerd voor het controleren van kentekenplaten (http://4.175.136.232:8080/nummerplaat).  
+  
 Deze configuratiegegevens worden gebruikt in de code om berichten weer te geven en communicatie met de API uit te voeren.  
   
 **[ESP Gatekeeper](esphome32/gatekeeper.yaml)**  
