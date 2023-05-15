@@ -81,7 +81,7 @@ Deze code is een HTTP-server die luistert op poort 8080 en communiceert met een 
 `type Data struct { ... }:` Dit definieert een struct genaamd "Data" met twee velden: "Naam" en "Checkout". Deze struct wordt gebruikt om gegevens te coderen en te decoderen in JSON-indeling.  
 `func main() { ... }:` Dit is de hoofdfunctie van het programma.  
 `currentTime := time.Now():` Dit verkrijgt de huidige tijd.  
-`` currentDate := currentTime.Format("2006-01-02"):` Dit formatteert de huidige tijd als een datum in het formaat "YYYY-MM-DD".  
+`currentDate := currentTime.Format("2006-01-02"):` Dit formatteert de huidige tijd als een datum in het formaat "YYYY-MM-DD".  
 `db, err := sql.Open("mysql", "Fonteyn:P@ssword@tcp(reserveringen.mysql.database.azure.com:3306)/klanten?tls=true"):` Dit opent een verbinding met de MySQL-database. De gebruikersnaam, wachtwoord, host en databasegegevens worden opgegeven in de verbindingsreeks.  
 `defer db.Close():` Dit zorgt ervoor dat de databaseverbinding wordt gesloten wanneer de functie eindigt.  
 `http.HandleFunc("/nummerplaat", func(w http.ResponseWriter, r *http.Request) { ... }):` Dit definieert een HTTP-handler voor het pad "/nummerplaat". Het verwerkt inkomende HTTP-verzoeken naar dit pad.  
