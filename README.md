@@ -44,8 +44,7 @@ In het kort, deze code maakt gebruik van computer vision-technieken om kentekenp
 `"Noon_start_time:"` De starttijd van de middagperiode (12 uur).  
 `"Evening_start_time:"` De starttijd van de avondperiode (18 uur).  
 `"No_parking_acces_start_time:"` De starttijd waarop geen toegang tot de parkeerfaciliteiten is toegestaan (23 uur).  
-`"API_ip_or_domain:"` Het IP-adres of domein van de API waarmee wordt gecommuniceerd (http://192.168.137.18).  
-`"API_port:"` De poort van de API (80).  
+`"API_ip_or_domain:"` Het IP-adres of domein van de API waarmee wordt gecommuniceerd (http://192.168.137.18:80).   
 `"Morning_message:"` Het bericht dat wordt weergegeven tijdens de ochtendperiode ("Good morning").  
 `"Noon_message:"` Het bericht dat wordt weergegeven tijdens de middagperiode ("Good afternoon").  
 `"Evening_message:"` Het bericht dat wordt weergegeven tijdens de avondperiode ("Good evening").  
