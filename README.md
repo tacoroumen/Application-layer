@@ -53,13 +53,23 @@ In het kort, deze code maakt gebruik van computer vision-technieken om kentekenp
 Deze configuratiegegevens worden gebruikt in de code om berichten weer te geven en communicatie met de API uit te voeren.  
   
 **[ESP Gatekeeper](esphome32/gatekeeper.yaml)**  
-<a href="/Screenshots/emmer%20vol%20water.PNG"><img src="/Screenshots/emmer%20vol%20water.PNG" align="right" height="90" width="110" ></a>
-Deze opdracht vond ik iets uitdagender hieom ook dat deze zig in de Wedstrijd folder bevindt. Ik ben hier persoonlijk wel nog tegen wat dingen aangelopen. Denk hierbij aan hoe zorg ik er voor dat mensen alleen maar getallen in kunnnen vullen, maar ook aan hoe zorg ik dat de annimatie van het vullen soepeltjes verloopt (wat zijn te groten stappen en wat te kleinen). 
+Deze code is een configuratiebestand voor het ESPHome-platform, waarmee je ESP32-microcontrollers kunt programmeren en configureren.  
+
+esphome: Dit geeft het begin van de ESPHome-configuratie aan en definieert de naam van het apparaat (gatekeeper).  
+logger: Hier wordt de logging geconfigureerd. Met level: VERY_VERBOSE worden zeer gedetailleerde logberichten ingeschakeld.  
+esp32: Hier worden de instellingen voor de ESP32-microcontroller gespecificeerd, zoals het gebruikte board (esp32doit-devkit-v1) en het framework (arduino).  
+wifi: Dit configureert de wifi-instellingen voor het apparaat, waarbij de ssid (netwerknaam) en het wachtwoord worden gelezen uit geheime waarden (secrets).  
+ota: Dit stelt over-the-air (OTA) updates in en specificeert het wachtwoord voor beveiligde updates, ook gelezen uit geheime waarden.  
+servo: Hier wordt een servo-motor geconfigureerd met een ID (my_servo) en een uitvoerkanaal (pwm_out).  
+output: Dit definieert de uitvoerinstellingen voor het apparaat, in dit geval een ledc-uitvoer (pwm_out) op pin 25 met een frequentie van 50 Hz.  
+sensor: Hier wordt een sensor geconfigureerd om de uptime (tijd dat het apparaat actief is) bij te houden.  
+web_server: Dit configureert een webserver op poort 80 en stelt authenticatie in met een gebruikersnaam en wachtwoord, gelezen uit geheime waarden. Ook word met de web_server de ESPHome RestAPI aangezet.  
+switch: Hier worden schakelaars (actuatoren) geconfigureerd. Er is een GPIO-schakelaar (gate) op pin 26 die wordt gebruikt om een poort te activeren. Er zijn twee acties gedefinieerd voor het in- en uitschakelen van de poort, waarbij ook een servo-motor wordt aangestuurd en een vertraging wordt toegepast. Er is ook een herstartschakelaar (reboot) geconfigureerd.  
+
+Kort samengevat, deze code configureert een ESP32-apparaat met wifi-connectiviteit, een servo-motor, een sensor voor het bijhouden van de uptime en een api met authenticatie. Er zijn ook schakelaars geconfigureerd om een poort te activeren en het apparaat te herstarten.  
   
-**[Woordvervormer](Wedstrijd/Woordvervormer/Form1.cs)**  
-<a href="/Screenshots/woordvervormer.PNG"><img src="/Screenshots/woordvervormer.PNG" align="right" height="150" width="150" ></a>
-Bij deze opdracht liep ik ook weer tegen een aantal puntjes aan, hierom zal ook deze zich bevinden in de wedstrijd folder. De dingen waar ik hier tegen aan liep kwamen voornamelijk voor bij de functies Omdraaien en Oneven. Deze puntjes waar ik tegen aan liep, kwamen vooral doordat ik dingen met een array moest doen die ik eerder nog niet had gedaan. Denk hier vooral aan maak een string met alleen plek 1,3 en 5 van een array, dit had ik nog nooit eerder gedaan en was dus ook echt even uitzoeken. Ook bij het opdraaien van het woord liep ik hier weer even tegenaan, ik heb er uiteindelijk voor gekozen om een nieuwe array te maken. Hierbij 0 beginnend met schrijven en bij het laatste caracter beginnen te lezen bij de oude array, dit zorgt ervoor dat ze precies andersom staan.  
+**[Gatekeeper API](gatekeeper%20API/main.go)**  
+
   
-**[Blackjack](Wedstrijd/Blackjack/Form1.cs)**  
-<a href="/Screenshots/Blackjack.PNG"><img src="/Screenshots/Blackjack.PNG" align="right" height="150" width="300" ></a>
-Bij Blackjack heb ik aan het begin echt zitte puzelen, ik wist gewoon echt niet waar/hoe ik moest beginnen. Toen ik eenmaal gevonden had waar ik mee wou beginnen verliep het allemaal vrij soepel, ik had alle UI snel gemaakt en het programma werkte na een paar tweaks vrijwel gelijk zoals verwacht. De rede dat blackjack zich in de Wedstrijd folder bevindt is, dat deze challenge zo is gemaakt dat hij alle hiervoor behandelde onderdelen in een opdracht verwerkt. Hierom was dit ook de meest uitdagende opdracht.
+**[Gatekeeper API/dockerfile](gatekeeper%20API/dockerfile)**  
+
