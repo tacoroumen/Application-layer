@@ -35,11 +35,11 @@ while True:
     # Use PyTesseract for OCR
     for (x, y, w, h) in plates:
         plate = gray[y:y+h, x:x+w]
-        string = pytesseract.image_to_string(plate, config='-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 --psm 6')
+        licenseplate = pytesseract.image_to_string(plate, config='-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 --psm 6')
         # Run terminal command with the plate as argument if it's exactly 6 characters long
-        if len(string) == 7:
-            print('License Plate:', string)
-            subprocess.run(["cmd", "/c", "go", "run", "main.go", "-plate", string])
+        if len(licenseplate) == 7:
+            #print('License Plate:', licenseplate)
+            subprocess.run(["cmd", "/c", "go", "run", "main.go", "-plate", licenseplate])
 
     # Show the image
     cv2.imshow('Image', image)

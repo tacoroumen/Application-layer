@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -15,6 +16,8 @@ type Data struct {
 }
 
 func main() {
+	currentTime := time.Now()
+	currentDate := currentTime.Format("2006-01-02")
 	db, err := sql.Open("mysql", "Fonteyn:P@ssword@tcp(reserveringen.mysql.database.azure.com:3306)/klanten?tls=true")
 	if err != nil {
 		log.Fatal(err)
@@ -24,22 +27,12 @@ func main() {
 	http.HandleFunc("/nummerplaat", func(w http.ResponseWriter, r *http.Request) {
 		licenseplate := r.URL.Query().Get("licenseplate")
 		if licenseplate != "" {
-			row := db.QueryRow("SELECT klant_naam FROM klant WHERE nummerplaat=?", licenseplate)
+			info := db.QueryRow("SELECT name, checkout FROM reservering WHERE kenteken=? AND checkout >=?", licenseplate, currentDate)
 			var data Data
-			err = row.Scan(&data.Naam)
+			err = info.Scan(&data.Naam, &data.Checkout)
 			if err != nil {
 				if err == sql.ErrNoRows {
-					http.Error(w, "License not found", http.StatusNotFound)
-					return
-				}
-				http.Error(w, "Database error", http.StatusInternalServerError)
-				return
-			}
-			info := db.QueryRow("SELECT checkout FROM reservering WHERE name=?", data.Naam)
-			err = info.Scan(&data.Checkout)
-			if err != nil {
-				if err == sql.ErrNoRows {
-					http.Error(w, "Checkout not found", http.StatusNotFound)
+					http.Error(w, "licenseplate or date not valid", http.StatusNotFound)
 					return
 				}
 				http.Error(w, "Database error", http.StatusInternalServerError)

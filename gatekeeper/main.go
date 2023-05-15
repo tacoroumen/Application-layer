@@ -76,7 +76,8 @@ func main() {
 	for _, Config := range conf {
 		req, err := http.NewRequest("GET", Config.API_Url, nil)
 		if err != nil {
-			panic(err)
+			log.Println(err)
+			os.Exit(13)
 		}
 		q := req.URL.Query()
 		q.Add("licenseplate", *plate)
@@ -86,7 +87,8 @@ func main() {
 		client := http.Client{}
 		resp, err := client.Do(req)
 		if err != nil {
-			panic(err)
+			log.Println(err)
+			os.Exit(13)
 		}
 		defer resp.Body.Close()
 
@@ -96,7 +98,9 @@ func main() {
 		}
 		err = json.NewDecoder(resp.Body).Decode(&response)
 		if err != nil {
-			panic(err)
+			fmt.Printf("%s\n", Config.Not_allowed)
+			log.Println(err)
+			os.Exit(403)
 		}
 		userName = response.Name
 	}

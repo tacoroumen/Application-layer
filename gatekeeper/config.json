@@ -4,7 +4,7 @@
 	    "Noon_start_time": 12,
 	    "Evening_start_time": 18,
 	    "No_parking_acces_start_time": 23,
-	    "API_ip_or_domain": "http://192.168.137.78",
+	    "API_ip_or_domain": "http://192.168.137.18",
 		"API_port": "80",
 	    "Morning_message": "Good morning",
         "Noon_message": "Good afternoon",
@@ -13,6 +13,6 @@
 		"Technical_dificulties": "Sorry, we are currently experiencing technical dificulties",
 	    "Welcome_message": "Welcome at Holiday parks.",
 		"Not_allowed": "Licensplate not permited!",
-		"API_Url": "http://20.76.36.251:8080/nummerplaat"
+		"API_Url": "http://4.175.136.232:8080/nummerplaat"
 	}
 ]
