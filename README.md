@@ -1,4 +1,4 @@
-# Uitleg opdrachten Applicatie laag 
+# Uitleg code Applicatie laag 
   
 ## In dit Bestand zal ik bij elke code een stukje informatie geven over wat deze code doet en waarvoor het gebruikt wordt.  
   
