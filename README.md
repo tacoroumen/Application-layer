@@ -1,8 +1,8 @@
-## Uitleg opdrachten Applicatie laag 
+# Uitleg opdrachten Applicatie laag 
   
-### In dit Bestand zal ik bij elke code een stukje informatie geven over wat deze code doet en waarvoor het gebruikt wordt.  
+# In dit Bestand zal ik bij elke code een stukje informatie geven over wat deze code doet en waarvoor het gebruikt wordt.  
   
-**[Gatekeeper/main.go](gatekeeper/main.go)**  
+### **[Gatekeeper/main.go](gatekeeper/main.go)**  
 Er wordt een Config struct gedefinieerd om configuratiegegevens op te slaan.  
 Er is ook een Payload struct gedefinieerd om gegevens voor een HTTP-verzoek te bevatten.  
   
