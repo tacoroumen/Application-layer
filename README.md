@@ -1,6 +1,6 @@
 # Uitleg opdrachten Applicatie laag 
   
-# In dit Bestand zal ik bij elke code een stukje informatie geven over wat deze code doet en waarvoor het gebruikt wordt.  
+## In dit Bestand zal ik bij elke code een stukje informatie geven over wat deze code doet en waarvoor het gebruikt wordt.  
   
 ### **[Gatekeeper/main.go](gatekeeper/main.go)**  
 Er wordt een Config struct gedefinieerd om configuratiegegevens op te slaan.  
@@ -18,7 +18,7 @@ Er is ook een Payload struct gedefinieerd om gegevens voor een HTTP-verzoek te b
   
 Kortom, deze code is een programma die toegang verleent tot een parkeerplaats op basis van een kentekenplaat, interactie heeft met een externe API en logboeken bijhoudt.  
     
-**[Gatekeeper/gatekeeper.py](gatekeeper/gatekeeper.py)**  
+### **[Gatekeeper/gatekeeper.py](gatekeeper/gatekeeper.py)**  
 De code importeert de vereiste bibliotheken: cv2, pytesseract en subprocess.  
   
 1. Er wordt een videostream van de webcam gestart met behulp van de cv2.VideoCapture(0)-functie.  
@@ -39,7 +39,7 @@ De code importeert de vereiste bibliotheken: cv2, pytesseract en subprocess.
    
 In het kort, deze code maakt gebruik van computer vision-technieken om kentekenplaten te detecteren en te lezen van een videostream van de webcam, en voert vervolgens een terminalopdracht uit met het gedetecteerde kenteken als argument.  
   
-**[config.json](gatekeeper/config.json)**  
+### **[config.json](gatekeeper/config.json)**  
 `"Morning_start_time:"` De starttijd van de ochtendperiode (7 uur).  
 `"Noon_start_time:"` De starttijd van de middagperiode (12 uur).  
 `"Evening_start_time:"` De starttijd van de avondperiode (18 uur).  
@@ -58,7 +58,7 @@ In het kort, deze code maakt gebruik van computer vision-technieken om kentekenp
   
 Deze configuratiegegevens worden gebruikt in de code om berichten weer te geven en communicatie met de API uit te voeren.  
   
-**[ESP Gatekeeper](esphome32/gatekeeper.yaml)**  
+### **[ESP Gatekeeper](esphome32/gatekeeper.yaml)**  
 Deze code is een configuratiebestand voor het ESPHome-platform, waarmee je ESP32-microcontrollers kunt programmeren en configureren.  
   
 `esphome:` Dit geeft het begin van de ESPHome-configuratie aan en definieert de naam van het apparaat (gatekeeper).  
@@ -74,7 +74,7 @@ Deze code is een configuratiebestand voor het ESPHome-platform, waarmee je ESP32
 
 Kort samengevat, deze code configureert een ESP32-apparaat met wifi-connectiviteit, een servo-motor, een sensor voor het bijhouden van de uptime en een api met authenticatie. Er zijn ook schakelaars geconfigureerd om een poort te activeren en het apparaat te herstarten.  
   
-**[Gatekeeper API](gatekeeper%20API/main.go)**  
+### **[Gatekeeper API](gatekeeper%20API/main.go)**  
 Deze code is een HTTP-server die luistert op poort 8080 en communiceert met een MySQL-database. Hier is een uitleg van de code:
   
 `package main:` Dit geeft aan dat dit het hoofdpakket van de Go-code is.  
@@ -97,7 +97,7 @@ Deze code is een HTTP-server die luistert op poort 8080 en communiceert met een 
    
 Kort samengevat, deze code implementeert een HTTP-server in Go die verbinding maakt met een MySQL-database en informatie opvraagt op basis van een opgegeven licentieplaatwaarde. Het retourneert de gevonden gegevens in JSON-indeling   
 
-**[Gatekeeper API/dockerfile](gatekeeper%20API/dockerfile)**  
+### **[Gatekeeper API/dockerfile](gatekeeper%20API/dockerfile)**  
 Deze code is een Dockerfile, een configuratiebestand dat wordt gebruikt om een Docker-container te bouwen.    
   
 `FROM golang:alpine:` Dit geeft aan dat we de officiële Golang Docker-image willen gebruiken als basis voor onze container. Specifiek wordt de "alpine" versie van de image gebruikt, wat een lichtgewicht versie is gebaseerd op het Alpine Linux-besturingssysteem.  
