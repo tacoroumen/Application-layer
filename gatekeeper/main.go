@@ -16,8 +16,9 @@ type Config struct {
 	Noon_start_time             int
 	Evening_start_time          int
 	No_parking_acces_start_time int
-	API_ip_or_domain            string
-	API_port                    string
+	ESP_API_ip_or_domain        string
+	ESP_API_user                string
+	ESP_API_passwrd             string
 	Morning_message             string
 	Noon_message                string
 	Evening_message             string
@@ -120,9 +121,9 @@ func main() {
 			log.Println("Failed to marshal payload:", err)
 			return
 		}
-		URL := Config.API_ip_or_domain + ":" + Config.API_port + "/switch/gate/turn_on"
+		URL := Config.ESP_API_ip_or_domain
 		req, err := http.NewRequest("POST", URL, bytes.NewBuffer(jsonPayload))
-		req.SetBasicAuth("Proftaak", "AfslagA1!")
+		req.SetBasicAuth(Config.ESP_API_user, Config.ESP_API_passwrd)
 		if err != nil {
 			log.Println("Failed to create http request:", err)
 			return
