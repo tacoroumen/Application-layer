@@ -13,7 +13,7 @@
         "No_parking_acces_message": "Sorry, our parking facilities are currently closed.",
 		"Technical_dificulties": "Sorry, we are currently experiencing technical dificulties",
 	    "Welcome_message": "Welcome at Holiday parks.",
-		"Not_allowed": "Licensplate not permited!",
+		"Not_allowed": "Licenseplate not permited!",
 		"API_Url": "http://4.175.136.232:8080/nummerplaat"
 	}
 ]
