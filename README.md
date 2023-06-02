@@ -43,18 +43,14 @@ In het kort, deze code maakt gebruik van computer vision-technieken om kentekenp
 `"Morning_start_time:"` De starttijd van de ochtendperiode (7 uur).  
 `"Noon_start_time:"` De starttijd van de middagperiode (12 uur).  
 `"Evening_start_time:"` De starttijd van de avondperiode (18 uur).  
-`"No_parking_acces_start_time:"` De starttijd waarop geen toegang tot de parkeerfaciliteiten is toegestaan (23 uur).  
-`"ESP_API_ip_or_domain:"` Het IP-adres of domein van de API waarmee wordt gecommuniceerd (http://192.168.137.18:80/switch/gate/turn_on).  
-`"ESP_API_user":` De gebruikersnaam die wordt gebruikt om te authenticeren bij de ESP API ("Proftaak").  
-`"ESP_API_passwrd":` het wachtwoord die wordt gebruikt om te authenticeren bij de ESP API("AfslagA1!").  
+`"No_parking_acces_start_time:"` De starttijd waarop geen toegang tot de parkeerfaciliteiten is toegestaan (23 uur).    
 `"Morning_message:"` Het bericht dat wordt weergegeven tijdens de ochtendperiode ("Good morning").  
 `"Noon_message:"` Het bericht dat wordt weergegeven tijdens de middagperiode ("Good afternoon").  
 `"Evening_message:"` Het bericht dat wordt weergegeven tijdens de avondperiode ("Good evening").  
 `"No_parking_acces_message:"` Het bericht dat wordt weergegeven wanneer de parkeerfaciliteiten gesloten zijn ("Sorry, our parking facilities are currently closed.").  
 `"Technical_dificulties:"` Het bericht dat wordt weergegeven wanneer er technische problemen zijn ("Sorry, we are currently experiencing technical difficulties").  
 `"Welcome_message:"` Het welkomstbericht dat wordt weergegeven ("Welcome at Holiday parks.").  
-`"Not_allowed:"` Het bericht dat wordt weergegeven wanneer een kentekenplaat niet is toegestaan ("License plate not permitted!").  
-`"API_Url:"` De URL van de API waarmee wordt gecommuniceerd voor het controleren van kentekenplaten (http://4.175.136.232:8080/nummerplaat).  
+`"Not_allowed:"` Het bericht dat wordt weergegeven wanneer een kentekenplaat niet is toegestaan ("License plate not permitted!").    
   
 Deze configuratiegegevens worden gebruikt in de code om berichten weer te geven en communicatie met de API uit te voeren.  
   
