@@ -74,9 +74,9 @@ func main() {
 
 	var conf []Config
 
-	files, errr := os.Open("secrets.json")
+	file, errr := os.Open("secrets.json")
 	if err != nil {
-		log.Println(err)
+		log.Println(errr)
 		return
 	}
 	defer file.Close()
@@ -91,35 +91,37 @@ func main() {
 	}
 	dt := time.Now()
 	for _, Config := range conf {
-		req, err := http.NewRequest("GET", Config.API_Url, nil)
-		if err != nil {
-			log.Println(err)
-			os.Exit(13)
-		}
-		q := req.URL.Query()
-		q.Add("licenseplate", *plate)
-		req.URL.RawQuery = q.Encode()
+		for _, Secrets := range secrets {
+			req, err := http.NewRequest("GET", Secrets.API_Url, nil)
+			if err != nil {
+				log.Println(err)
+				os.Exit(13)
+			}
+			q := req.URL.Query()
+			q.Add("licenseplate", *plate)
+			req.URL.RawQuery = q.Encode()
 
-		// Make the request and get the response
-		client := http.Client{}
-		resp, err := client.Do(req)
-		if err != nil {
-			log.Println(err)
-			os.Exit(13)
-		}
-		defer resp.Body.Close()
+			// Make the request and get the response
+			client := http.Client{}
+			resp, err := client.Do(req)
+			if err != nil {
+				log.Println(err)
+				os.Exit(13)
+			}
+			defer resp.Body.Close()
 
-		// Parse the JSON response and get the name
-		var response struct {
-			Name string `json:"naam"`
+			// Parse the JSON response and get the name
+			var response struct {
+				Name string `json:"naam"`
+			}
+			err = json.NewDecoder(resp.Body).Decode(&response)
+			if err != nil {
+				fmt.Printf("%s\n", Config.Not_allowed)
+				log.Println(err)
+				os.Exit(403)
+			}
+			userName = response.Name
 		}
-		err = json.NewDecoder(resp.Body).Decode(&response)
-		if err != nil {
-			fmt.Printf("%s\n", Config.Not_allowed)
-			log.Println(err)
-			os.Exit(403)
-		}
-		userName = response.Name
 	}
 
 	for _, Config := range conf {

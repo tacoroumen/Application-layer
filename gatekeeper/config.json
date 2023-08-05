@@ -1,15 +1,15 @@
 [
-    {
-        "Morning_start_time": 7,
-	    "Noon_start_time": 12,
-	    "Evening_start_time": 18,
-	    "No_parking_acces_start_time": 23,
-	    "Morning_message": "Good morning",
-        "Noon_message": "Good afternoon",
-	    "Evening_message": "Good evening",
-        "No_parking_acces_message": "Sorry, our parking facilities are currently closed.",
+	{
+		"Morning_start_time": 7,
+		"Noon_start_time": 12,
+		"Evening_start_time": 18,
+		"No_parking_acces_start_time": 23,
+		"Morning_message": "Good morning",
+		"Noon_message": "Good afternoon",
+		"Evening_message": "Good evening",
+		"No_parking_acces_message": "Sorry, our parking facilities are currently closed.",
 		"Technical_dificulties": "Sorry, we are currently experiencing technical dificulties",
-	    "Welcome_message": "Welcome at Holiday parks.",
+		"Welcome_message": "Welcome at Holiday parks.",
 		"Not_allowed": "Licenseplate not permited!"
 	}
 ]
