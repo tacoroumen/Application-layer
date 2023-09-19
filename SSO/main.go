@@ -7,16 +7,15 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 )
 
-func getconfig() (string, string, string, string, string, string) {
+func getconfig() (string, string, string, string, string) {
 	// Read the content of the aconfig.json file
 	data, err := ioutil.ReadFile("config.json")
 	if err != nil {
 		fmt.Println("Error reading config.json:", err)
-		os.Exit(0)
+		return "", "", "", "", ""
 	}
 
 	// Parse the JSON data into the Config struct
@@ -24,17 +23,17 @@ func getconfig() (string, string, string, string, string, string) {
 	err = json.Unmarshal(data, &config)
 	if err != nil {
 		fmt.Println("Error parsing JSON:", err)
-		os.Exit(1)
+		return "", "", "", "", ""
 	}
-	return config.Client_id, config.Redirect_uri, config.Grant_type, config.Scope, config.Client_secret, config.Medwerker_Email
+	return config.Client_id, config.Redirect_uri, config.Grant_type, config.Scope, config.Medwerker_Email
 }
 
-func getsecrets() string {
+func getsecrets() (string, string) {
 	// Read the content of the secrets.json file
 	data, err := ioutil.ReadFile("secrets.json")
 	if err != nil {
 		fmt.Println("Error reading secrets.json:", err)
-		os.Exit(0)
+		return "", ""
 	}
 
 	// Parse the JSON data into the Secrets struct
@@ -42,9 +41,9 @@ func getsecrets() string {
 	err = json.Unmarshal(data, &secrets)
 	if err != nil {
 		fmt.Println("Error parsing JSON:", err)
-		os.Exit(1)
+		return "", ""
 	}
-	return secrets.State
+	return secrets.State, secrets.Client_secret
 }
 
 func containsSubstring(inputString, substring string) bool {
@@ -56,13 +55,13 @@ type Config struct {
 	Redirect_uri       string `json:"redirect_uri"`
 	Grant_type         string `json:"grant_type"`
 	Grant_type_refresh string `json:"grant_type_refresh"`
-	Client_secret      string `json:"client_secret"`
 	Scope              string `json:"scope"`
 	Medwerker_Email    string `json:"medwerker_email"`
 }
 
 type Secrets struct {
 	State string `json:"state"`
+	Client_secret string `json:"client_secret"`
 }
 
 type microsoft_access struct {
@@ -89,15 +88,19 @@ func main() {
 	http.HandleFunc("/verify", func(w http.ResponseWriter, r *http.Request) {
 		code := r.URL.Query().Get("code")
 		state := r.URL.Query().Get("state")
-		secrets_state := getsecrets()
+		secrets_state, client_secret := getsecrets()
+		if secrets_state == "" {
+			http.Error(w, "Error reading secrets.json", http.StatusBadRequest)
+			return
+		}
 		if code == "" {
 			http.Error(w, "Error 400: No code provided.", http.StatusBadRequest)
 			return
 		} else if state == "" {
-			http.Error(w, "Error 400: No api-key provided.", http.StatusBadRequest)
+			http.Error(w, "Error 400: No key provided.", http.StatusBadRequest)
 			return
 		} else if state != secrets_state {
-			http.Error(w, "Error 401: api-key not valid.", http.StatusUnauthorized)
+			http.Error(w, "Error 401: key not valid.", http.StatusUnauthorized)
 			return
 		} else {
 			// Define the token endpoint URL
@@ -105,7 +108,11 @@ func main() {
 
 			// Prepare the form data
 			formData := url.Values{}
-			client_id, redirect_uri, grant_type, scope, client_secret, medwerker_email := getconfig()
+			client_id, redirect_uri, grant_type, scope, medwerker_email := getconfig()
+			if client_id == "" {
+				http.Error(w, "Error reading config.json", http.StatusBadRequest)
+				return
+			}
 			formData.Set("client_id", client_id)
 			formData.Set("code", code)
 			formData.Set("scope", scope)
