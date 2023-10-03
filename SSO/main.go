@@ -60,7 +60,7 @@ type Config struct {
 }
 
 type Secrets struct {
-	State string `json:"state"`
+	State         string `json:"state"`
 	Client_secret string `json:"client_secret"`
 }
 
@@ -162,15 +162,15 @@ func main() {
 
 			// Create the JSON response with the desired format
 			jsonResponse := fmt.Sprintf(`{
-				"AgeGroup": "%s",
-				"CountryCode": "%s",
-				"UUID": "%s",
-				"eMail": "%s",
-				"Employee": "%v",
-				"Name": "%s",
-				"FirstName": "%s",
-				"LastName": "%s"
-			}`, AgeGroup, CountryCode, UUID, eMail, Employee, Name, FirstName, LastName)
+	"AgeGroup": "%s",
+	"CountryCode": "%s",
+	"UUID": "%s",
+	"eMail": "%s",
+	"Employee": "%v",
+	"Name": "%s",
+	"FirstName": "%s",
+	"LastName": "%s"
+}`, AgeGroup, CountryCode, UUID, eMail, Employee, Name, FirstName, LastName)
 
 			// Set the Content-Type header and write the JSON response
 			w.Header().Set("Content-Type", "application/json")
@@ -178,7 +178,7 @@ func main() {
 			return
 		}
 	})
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":443", nil))
 }
 
 func Graph_Microsoft(token string) (AgeGroup string, CountryCode string, UUID string, eMail string, FirstName string, LastName string) {

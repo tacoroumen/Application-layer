@@ -3,6 +3,5 @@
 	"redirect_uri": "https://172.0.0.1/verify",
 	"grant_type": "authorization_code",
 	"scope": "user.read mail.read",
-	"client_secret": "M3c8Q~pV-4ZgX2eL8VQhESxFWP24svhibCBlmbJM",
 	"medwerker_email": "@41d2tz.onmicrosoft.com"
 }
