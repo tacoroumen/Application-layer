@@ -178,7 +178,7 @@ func main() {
 			return
 		}
 	})
-	log.Fatal(http.ListenAndServe(":443", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func Graph_Microsoft(token string) (AgeGroup string, CountryCode string, UUID string, eMail string, FirstName string, LastName string) {
