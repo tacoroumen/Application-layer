@@ -95,7 +95,7 @@ func main() {
 
 		// Parse the JSON response and get the name
 		var response struct {
-			Name string `json:"naam"`
+			Firstname string `json:"firstname"`
 		}
 		err = json.NewDecoder(resp.Body).Decode(&response)
 		if err != nil {
@@ -103,7 +103,7 @@ func main() {
 			log.Println(err)
 			os.Exit(403)
 		}
-		userName = response.Name
+		userName = response.Firstname
 	}
 
 	for _, Config := range conf {
